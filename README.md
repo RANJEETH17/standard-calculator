@@ -1,30 +1,135 @@
 # Design of a Standard Calculator
-AIM:
 
-To design a web application for a standard calculator. DESIGN STEPS:
+## AIM:
 
-Step 1: Clone the github repository and create Django admin interface.
+To design a web application for a standard calculator.
 
-Step 2: Change settings.py file to allow request from all hosts.
+## DESIGN STEPS:
 
-Step 3: Use CSS for creating attractive colors.
+### Step 1:
+Create a new Django project using  "django-admin startproject",get into the project terminal  and use "python3 manage.py startapp" command.
 
-Step 4: Write JavaScript program for implementing five different operations.
+### Step 2:
+Define  urls.py and views.py for the website .Allow host access and add the app name under installed 
 
-Step 5: Validate the HTML and CSS code.
+### Step 3:
+Create a templates folder under the app folder followed by a folder under templates with the app name followed by html file named calculator.html
 
-Step 6: Publish the website in the given URL.
+### Step 4:
+Write HTML and CSS code in the file save it and run the app using python manage.py makemigrations and python manage.py migrate commands .Run the Server using "python3 manage.py runserver 0:80" command.
 
-Step 7: Validate the HTML and CSS code.
+### Step 5:
+ Validate the HTML and CSS code.
+### Step 6:
+Publish the website in the given URL.
 
-Step 8: Publish the website in the given URL. PROGRAM :
+## PROGRAM :
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>calculator</title>
+    <style type="text/css">
+      body {
+        background-color: #444654;
+      }
+      table {
+        border: 1px solid grey;
+        background-color: grey;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 15px;
+        height: 500px;
+        width: 50px;
+      }
+      input[type="text"] {
+        border: 1px solid black;
+        padding: 20px 30px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 2px;
+        width: 330px;
+      }
 
-<title>Calculator</title> <script src="script.js" defer></script> AC DEL ÷ 1 2 3 * 4 5 6 + 7 8 9 - . 0 = <script> class Calculator { constructor(previousOperandTextElement, currentOperandTextElement) { this.previousOperandTextElement = previousOperandTextElement this.currentOperandTextElement = currentOperandTextElement this.clear() } clear() { this.currentOperand = '' this.previousOperand = '' this.operation = undefined } delete() { this.currentOperand = this.currentOperand.toString().slice(0, -1) } appendNumber(number) { if (number === '.' && this.currentOperand.includes('.')) return this.currentOperand = this.currentOperand.toString() + number.toString() } chooseOperation(operation) { if (this.currentOperand === '') return if (this.previousOperand !== '') { this.compute() } this.operation = operation this.previousOperand = this.currentOperand this.currentOperand = '' } compute() { let computation const prev = parseFloat(this.previousOperand) const current = parseFloat(this.currentOperand) if (isNaN(prev) || isNaN(current)) return switch (this.operation) { case '+': computation = prev + current break case '-': computation = prev - current break case '*': computation = prev * current break case '÷': computation = prev / current break default: return } this.currentOperand = computation this.operation = undefined this.previousOperand = '' } getDisplayNumber(number) { const stringNumber = number.toString() const integerDigits = parseFloat(stringNumber.split('.')[0]) const decimalDigits = stringNumber.split('.')[1] let integerDisplay if (isNaN(integerDigits)) { integerDisplay = '' } else { integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 }) } if (decimalDigits != null) { return `${integerDisplay}.${decimalDigits}` } else { return integerDisplay } } updateDisplay() { this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand) if (this.operation != null) { this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}` } else { this.previousOperandTextElement.innerText = '' } } } const numberButtons = document.querySelectorAll('[data-number]') const operationButtons = document.querySelectorAll('[data-operation]') const equalsButton = document.querySelector('[data-equals]') const deleteButton = document.querySelector('[data-delete]') const allClearButton = document.querySelector('[data-all-clear]') const previousOperandTextElement = document.querySelector('[data-previous-operand]') const currentOperandTextElement = document.querySelector('[data-current-operand]') const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement) numberButtons.forEach(button => { button.addEventListener('click', () => { calculator.appendNumber(button.innerText) calculator.updateDisplay() }) }) operationButtons.forEach(button => { button.addEventListener('click', () => { calculator.chooseOperation(button.innerText) calculator.updateDisplay() }) }) equalsButton.addEventListener('click', button => { calculator.compute() calculator.updateDisplay() }) allClearButton.addEventListener('click', button => { calculator.clear() calculator.updateDisplay() }) deleteButton.addEventListener('click', button => { calculator.delete() calculator.updateDisplay() }) </script> <style> *, *::before, *::after { box-sizing: border-box; font-family: Gotham Rounded, sans-serif; font-weight: normal; } body { padding: 0; margin: 0; background:(to right,lightsteelblue,lemonchiffon); } .calculator-grid { display: grid; justify-content: center; align-content: center; min-height: 100vh; grid-template-columns: repeat(4, 100px); grid-template-rows: minmax(120px, auto) repeat(5, 100px); } .calculator-grid > button { cursor: pointer; font-size: 2rem; border: 1px solid white; outline: none; background-color: lightgrey; } .calculator-grid > button:hover { background-color:lightyellow; } .span-two { grid-column: span 2; } .output { grid-column: 1 / -1; background-color: rgba(0, 0, 0, .75); display: flex; align-items: flex-end; justify-content: space-around; flex-direction: column; padding: 10px; word-wrap: break-word; word-break: break-all; } .output .previous-operand { color:royalblue; font-size: 1.5rem; } .output .current-operand { color: white; font-size: 2.5rem; } </style> AIM:
-To design a web application for a standard calculator. DESIGN STEPS:
+      input[type="button"] {
+        color: blue;
 
-OUTPUT:
-![Screenshot (35)](https://github.com/RANJEETH17/standard-calculator/assets/120718823/a293192a-d1fe-495d-85a7-ea34aeab69bf)
+        font-weight: bold;
+        width: 100%;
+        padding: 20px 40px;
+        background-color: black;
 
+        border-radius: 50px;
+      }
+      input[type="button"]:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease-in-out;
+        color: #2fe3bd;
+        background-color: #444654;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="form1" onload="result.value=''">
+      <h1 style="text-align: center; color: blue">Simple Calculator</h1>
+      <table id="calc">
+        <tr>
+          <td colspan="3">
+            <input type="text" id="result" />
+          </td>
+        </tr>
+        <tr>
+          <td><input type="button" value="1" onclick="result.value+='1'" /></td>
+          <td><input type="button" value="2" onclick="result.value+='2'" /></td>
+          <td><input type="button" value="3" onclick="result.value+='3'" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="4" onclick="result.value+='4'" /></td>
+          <td><input type="button" value="5" onclick="result.value+='5'" /></td>
+          <td><input type="button" value="6" onclick="result.value+='6'" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="7" onclick="result.value+='7'" /></td>
+          <td><input type="button" value="8" onclick="result.value+='8'" /></td>
+          <td><input type="button" value="9" onclick="result.value+='9'" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="+" onclick="result.value+='+'" /></td>
+          <td><input type="button" value="-" onclick="result.value+='-'" /></td>
+          <td><input type="button" value="*" onclick="result.value+='*'" /></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="/" onclick="result.value+='/'" /></td>
+          <td><input type="button" value="0" onclick="result.value+='0'" /></td>
+          <td><input type="button" value="." onclick="result.value+='.'" /></td>
+        </tr>
 
-Result:
-program executed successfully
+        <tr>
+          <td colspan="2">
+            <input
+              type="button"
+              value="="
+              onclick="result.value=eval(result.value)"
+            />
+          </td>
+          <td colspan="1">
+            <input
+              type="button"
+              value="clearall"
+              id="clear"
+              onclick="result.value=''"
+            />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
+
+```
+
+## OUTPUT:
+![image](https://github.com/SudharsanamRK/standard-calculator/assets/115523484/f54b1f9e-7524-49d8-93a3-724043f6ea0e)
+
+## Result:
+Thus we designed a web application for a standard calculator.
